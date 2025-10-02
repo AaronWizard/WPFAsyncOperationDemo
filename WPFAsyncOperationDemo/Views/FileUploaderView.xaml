@@ -15,16 +15,21 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Status:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock x:Name="uploadStatus" Grid.Column="1" Text="{Binding StatusMessage, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-        <TextBlock Text="Progress:" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <ProgressBar x:Name="uploadProgress" Height="10" Grid.Row="1" Grid.Column="1" Value="{Binding Progress, Mode=OneWay}" Maximum="{Binding MaxProgress, Mode=OneWay}" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="filePath" Grid.Row="2" Grid.ColumnSpan="2" Height="20" IsEnabled="{Binding CanUpload}" Text="{Binding FilePath, Mode=TwoWay}" />
-        <Button Content="Upload" Width="50" Grid.Row="2" Grid.Column="2" Height="20" Command="{Binding UploadCommand}" CommandParameter="{Binding Text, ElementName=filePath, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Text="Status:" VerticalAlignment="Center" />
+        <TextBlock Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Text="{Binding StatusMessage, Mode=OneWay}" />
+
+        <TextBlock Text="Progress:" Grid.Row="1" VerticalAlignment="Center" />
+        <ProgressBar Height="10" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Value="{Binding Progress, Mode=OneWay}" Maximum="{Binding MaxProgress, Mode=OneWay}" />
+
+        <Button Content="Select File" Grid.Row="2" VerticalAlignment="Center" Height="20" Margin="0,0,10,0" IsEnabled="{Binding CanUpload}" Click="btnSelectFile_Click" />
+        <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="2" Grid.Column="1" Height="20" >
+            <TextBlock VerticalAlignment="Center" IsEnabled="False" Text="{Binding FilePath, Mode=OneWay}" />
+        </Border>
+        <Button Content="Upload" Width="50" Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" Height="20" Margin="10,0,0,0" Command="{Binding UploadCommand}" CommandParameter="{Binding FilePath}" />
     </Grid>
 </Window>
